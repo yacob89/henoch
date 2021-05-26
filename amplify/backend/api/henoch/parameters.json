@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "henoch",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authhenochf081eed6",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
