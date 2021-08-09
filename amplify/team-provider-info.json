@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-henoch-dev-144812-unauthRole",
       "StackName": "amplify-henoch-dev-144812",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:148431790195:stack/amplify-henoch-dev-144812/bbb0c220-bdf6-11eb-9470-0a221f7be352",
-      "AmplifyAppId": "d1xy8gk0p6mri2"
+      "AmplifyAppId": "d1xy8gk0p6mri2",
+      "AuthTriggerTemplateURL": ""
     },
     "categories": {
       "auth": {
