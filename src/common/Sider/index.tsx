@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-//import styled from "styled-components";
 import { Layout, Menu } from "antd";
 import {
   UploadOutlined,
@@ -8,20 +7,6 @@ import {
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
-
-/* const TabsMarginBottomStyled = styled(Tabs)`
-  .ant-tabs-nav {
-    margin-bottom: 0px;
-  }
-  .ant-tabs-tab {
-    padding-left: 28px;
-    padding-right: 28px;
-    margin-right: 0px;
-  }
-  .ant-tabs-tab-active {
-    background-color: white;
-  }
-`; */
 
 interface TypeProps {
   title?: string;
