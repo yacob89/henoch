@@ -4,14 +4,12 @@ import * as queries from "src/graphql/queries";
 
 import { TypeNote } from "src/types/TypeNote";
 
-interface ContextConfiguration {
+interface ContextTodo {
   items: TypeNote[];
   refetch: () => Promise<void>;
 }
 
-export const TodoContext = createContext<ContextConfiguration | undefined>(
-  undefined
-);
+export const TodoContext = createContext<ContextTodo | undefined>(undefined);
 
 export const TodoProvider: React.FC<{}> = ({ children }) => {
   const [todo, setTodo] = useState<TypeNote[]>([]);
@@ -21,7 +19,6 @@ export const TodoProvider: React.FC<{}> = ({ children }) => {
     const result: any = await (API.graphql({
       query: queries.listTodos,
     }) as Promise<TypeNote[]>);
-    console.log("hasil: ", result.data.listTodos.items);
     result && setTodo(result.data.listTodos.items);
   };
 
@@ -37,7 +34,7 @@ export const TodoProvider: React.FC<{}> = ({ children }) => {
   );
 };
 
-export const useContextTodo = (): ContextConfiguration => {
+export const useContextTodo = (): ContextTodo => {
   const value = useContext(TodoContext);
   if (value === undefined) {
     throw new Error("useContextTodo must be used within a ConfigProvider");
