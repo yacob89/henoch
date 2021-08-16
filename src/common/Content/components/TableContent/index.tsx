@@ -12,6 +12,8 @@ interface TypeProps {
   datasource: TypeNote[];
 }
 
+const getRowId = (row: TypeNote): string => row.id || "";
+
 const columns = [
   {
     title: "Name",
@@ -28,7 +30,7 @@ const columns = [
 ];
 
 const TableContent: FC<TypeProps> = ({ title, datasource }) => {
-  return <Table columns={columns} dataSource={datasource} />;
+  return <Table columns={columns} dataSource={datasource} rowKey={getRowId} />;
 };
 
 export default TableContent;

@@ -43,10 +43,6 @@ const ContentPanel: FC<TypeProps> = ({ title }) => {
     loadNotes();
   }, []);
 
-  useEffect(() => {
-    loadNotes();
-  }, [notesData]);
-
   const loadNotes = async () => {
     try {
       const posts = await DataStore.query(Todo);
@@ -76,6 +72,7 @@ const ContentPanel: FC<TypeProps> = ({ title }) => {
       console.log("Post saved successfully!");
       tempNotesData.push(createResponseBeforeSubmit(values));
       setNotesData(tempNotesData);
+      loadNotes();
     } catch (error) {
       console.log("Error saving post", error);
     }
