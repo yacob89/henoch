@@ -16,10 +16,14 @@ export const TodoProvider: React.FC<{}> = ({ children }) => {
 
   const refetch = async (): Promise<void> => {
     // TODO: improve GraphQL result typing
-    const result: any = await (API.graphql({
-      query: queries.listTodos,
-    }) as Promise<TypeNote[]>);
-    result && setTodo(result.data.listTodos.items);
+    try {
+      const result: any = await (API.graphql({
+        query: queries.listTodos,
+      }) as Promise<TypeNote[]>);
+      result && setTodo(result.data.listTodos.items);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

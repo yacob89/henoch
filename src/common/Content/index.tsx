@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import Layout from "antd/lib/layout";
 import Form from "antd/lib/form";
@@ -40,6 +40,11 @@ interface TypeProps {
 const ContentPanel: FC<TypeProps> = ({ title }) => {
   const [notesData, setNotesData] = useState<TypeNote[]>([]);
   const todoList = useContextTodo();
+
+  useEffect(() => {
+    todoList.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const createResponseBeforeSubmit = (
     formValues: TypeNotesFormValues,
