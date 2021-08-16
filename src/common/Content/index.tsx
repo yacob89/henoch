@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import Layout from "antd/lib/layout";
 import Form from "antd/lib/form";
@@ -6,10 +6,12 @@ import Input from "antd/lib/input";
 import Button from "antd/lib/button";
 import Row from "antd/lib/row";
 import Col from "antd/lib/col";
+import { DataStore } from "aws-amplify";
 
 import { TypeNote } from "src/types/TypeNote";
 
 import TableContent from "src/common/Content/components/TableContent";
+import { Todo } from "src/models";
 
 const { Content } = Layout;
 
@@ -37,6 +39,27 @@ interface TypeProps {
 const ContentPanel: FC<TypeProps> = ({ title }) => {
   const [notesData, setNotesData] = useState<TypeNote[]>([]);
 
+  useEffect(() => {
+    loadNotes();
+  }, []);
+
+  useEffect(() => {
+    loadNotes();
+  }, [notesData]);
+
+  const loadNotes = async () => {
+    try {
+      const posts = await DataStore.query(Todo);
+      console.log(
+        "Posts retrieved successfully!",
+        JSON.stringify(posts, null, 2)
+      );
+      setNotesData(posts);
+    } catch (error) {
+      console.log("Error retrieving posts", error);
+    }
+  };
+
   const createResponseBeforeSubmit = (
     formValues: TypeNotesFormValues,
     originData?: TypeNote
@@ -46,11 +69,16 @@ const ContentPanel: FC<TypeProps> = ({ title }) => {
     };
   };
 
-  const onFinish = (values: TypeNotesFormValues): void => {
-    console.log("Success:", createResponseBeforeSubmit(values));
+  const onFinish = async (values: TypeNotesFormValues): Promise<void> => {
     let tempNotesData = [...notesData];
-    tempNotesData.push(createResponseBeforeSubmit(values));
-    setNotesData(tempNotesData);
+    try {
+      await DataStore.save(new Todo(createResponseBeforeSubmit(values)));
+      console.log("Post saved successfully!");
+      tempNotesData.push(createResponseBeforeSubmit(values));
+      setNotesData(tempNotesData);
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
