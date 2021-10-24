@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+///import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Layout } from "antd";
 import "./App.css";
 
 import Home from "./pages/Home";
 import EditPeople from "./pages/EditPeople";
-import SiderPanel from "src/common/Sider";
+//import SiderPanel from "src/common/Sider";
 import HeaderPanel from "src/common/Header";
 import FooterPanel from "src/common/Footer";
 
@@ -18,11 +18,11 @@ function App() {
   return (
     <LayoutStyled>
       <Router>
-        <SiderPanel />
+        {/* <SiderPanel /> */}
         <Layout>
           <HeaderPanel />
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/admin">
               <Home />
             </Route>
             <Route exact path="/edit-people">
@@ -36,5 +36,5 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
-//export default App;
+//export default withAuthenticator(App);
+export default App;
