@@ -1,13 +1,29 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Menu from "antd/lib/menu";
 import Image from "antd/lib/image";
 import Row from "antd/lib/row";
 import Space from "antd/lib/space";
-import Typography from "antd/lib/typography";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
 //import { AmplifySignOut } from "@aws-amplify/ui-react";
 
-const { Text } = Typography;
+const TitleStyled = styled.span`
+  margin-left: 12px;
+  margin-bottom: 0px;
+  font-size: 24px;
+`;
+
+const SubTitleStyled = styled.span`
+  margin-left: 12px;
+  font-size: 16px;
+  margin-top: 2px;
+`;
+
+const RowStyled = styled(Row)`
+  background-color: white;
+  width: 100%;
+`;
 
 interface TypeProps {
   title?: string;
@@ -22,25 +38,30 @@ const HeaderPanel: FC<TypeProps> = ({ title }) => {
 
   return (
     <>
-      <Row>
+      <RowStyled>
         <Image src="https://www.lsmradio.com/img/logo-only.jpg" />
         <Space direction="vertical">
-          <Text italic>Pelajaran Hayat</Text>
-          <Text italic>Pelajaran Hayat</Text>
+          <TitleStyled>Yasperin</TitleStyled>
+          <SubTitleStyled>Radio Pelajaran Hayat Alkitab</SubTitleStyled>
         </Space>
-      </Row>
+      </RowStyled>
       <Row>
-        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+        <Menu
+          onClick={handleClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          style={{ width: "100%" }}
+        >
           <Menu.Item key="mail" icon={<MailOutlined />}>
             Program
           </Menu.Item>
-          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+          <Menu.Item key="contact" icon={<AppstoreOutlined />}>
             Hubungi Kami
           </Menu.Item>
-          <Menu.Item key="app" icon={<AppstoreOutlined />}>
-            Menu 1
+          <Menu.Item key="admin" icon={<AppstoreOutlined />}>
+            <Link to="/admin">Admin</Link>
           </Menu.Item>
-          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+          <Menu.Item key="menu2" icon={<AppstoreOutlined />}>
             Menu 2
           </Menu.Item>
         </Menu>

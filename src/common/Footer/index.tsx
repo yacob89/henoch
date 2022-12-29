@@ -8,7 +8,9 @@ interface TypeProps {
 }
 
 const FooterPanel: FC<TypeProps> = ({ title }) => {
-  return <Footer style={{ textAlign: "center" }}>Yacob Madiana ©2021</Footer>;
+  return (
+    <Footer style={{ textAlign: "center" }}>Church in Bandung ©2021</Footer>
+  );
 };
 
 export default FooterPanel;
